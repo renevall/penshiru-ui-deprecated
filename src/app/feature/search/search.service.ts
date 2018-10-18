@@ -24,7 +24,7 @@ export class SearchService {
 
   autoComplete(query: string): Observable<string[]> {
     console.log('autocomplete reached');
-    return of(['rene', 'rosa', 'augusto']);
+    return of(['rene', 'Pedro', 'augusto', 'Arturo']);
     // return this.http.get<string[]>(this.autoCompleteAPI + '?query=' + query);
   }
 

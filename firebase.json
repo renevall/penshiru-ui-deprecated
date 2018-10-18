@@ -1,0 +1,12 @@
+{
+  "hosting": {
+    "public": "dist/penshiru-ui",
+    "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ]
+  }
+}
