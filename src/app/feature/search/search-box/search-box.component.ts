@@ -1,4 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Subject } from 'rxjs';
+import {
+  debounceTime,
+  distinctUntilChanged,
+  switchMap,
+  map,
+  tap
+} from 'rxjs/operators';
 
 @Component({
   selector: 'app-search-box',
@@ -6,7 +14,22 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./search-box.component.scss']
 })
 export class SearchBoxComponent implements OnInit {
+  @Output()
+  searchChange = new EventEmitter<string>();
+  private searchText$ = new Subject<string>();
+
   constructor() {}
 
-  ngOnInit() {}
+  search(query: string) {
+    this.searchText$.next(query);
+  }
+
+  ngOnInit() {
+    this.searchText$
+      .pipe(
+        debounceTime(500),
+        distinctUntilChanged()
+      )
+      .subscribe(result => this.searchChange.emit(result));
+  }
 }

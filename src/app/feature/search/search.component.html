@@ -1,5 +1,5 @@
 <div class="container" fxLayout="row" fxLayoutAlign="center">
-  <app-search-box fxFlex="80">
+  <app-search-box (searchChange)="search($event)" fxFlex="80">
   </app-search-box>
 </div>
 <div class="container" fxLayout="row" fxLayoutAlign="center">
@@ -13,3 +13,6 @@
     </div>
   </div>
 </div>
+
+{{ (results$ | async) | json}}
+{{ (autoItems$ | async) | json}}
